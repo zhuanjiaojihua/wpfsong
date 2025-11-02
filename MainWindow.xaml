@@ -1,0 +1,139 @@
+﻿<Window x:Class="WPFSong.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFSong"
+        xmlns:cons="clr-namespace:WPFSong.Controls"
+        Background="{Binding BackgroundBrush}"
+        mc:Ignorable="d"
+        MaxHeight="600"
+        MaxWidth="1200"
+        Title="均衡器EQ" Height="600" Width="1200" WindowStartupLocation="CenterScreen" Closed="Winfrom_Closed">
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="65*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="建设中" Foreground="White" TextAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,40" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="2,2,0,2" Width="925">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
+                        <Label Foreground="{DynamicResource TextColorMain}">预设</Label>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <ComboBox FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="Black" Background="{DynamicResource BackgroundBrush}">
+                            <ComboBoxItem IsSelected="True">预设项</ComboBoxItem>
+                            <ComboBoxItem>111</ComboBoxItem>
+                            <ComboBoxItem>222</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button Content="Open" Foreground="{DynamicResource TextColorMain}" Background="Transparent" Click="OpenFile"></Button>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <Button Content="播放" Foreground="{DynamicResource TextColorMain}" Background="Transparent" Click="bofang" ></Button>
+                    </Grid>
+                    <Grid Grid.Column="4">
+                        <Button Content="暂停" Foreground="{DynamicResource TextColorMain}" Background="Transparent" Click="zanting" ></Button>
+                    </Grid>
+                    <Grid Grid.Column="6">
+                        <Button Content="导出" Foreground="{DynamicResource TextColorMain}" Background="Transparent" Click="Button_Click_1" ></Button>
+                    </Grid>
+                    <Grid Grid.Column="7">
+                        <Button Click="Button_Click" Content="测试"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" x:Name="sliderPanel">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <cons:SlideValue SliderValueChanged="btn31_SliderValueChanged" x:Name="btn31" Grid.Column="0" DisplayText="&lt;-31"/>
+                    <cons:SlideValue SliderValueChanged="btn63_SliderValueChanged" x:Name="btn63" Grid.Column="1" DisplayText="63"/>
+                    <cons:SlideValue SliderValueChanged="btn125_SliderValueChanged" x:Name="btn125" Grid.Column="2" DisplayText="125"/>
+                    <cons:SlideValue SliderValueChanged="btn250_SliderValueChanged" x:Name="btn250" Grid.Column="3" DisplayText="250"/>
+                    <cons:SlideValue SliderValueChanged="btn500_SliderValueChanged" x:Name="btn500" Grid.Column="4" DisplayText="500"/>
+                    <cons:SlideValue SliderValueChanged="btn1k_SliderValueChanged" x:Name="btn1k" Grid.Column="5" DisplayText="1k"/>
+                    <cons:SlideValue SliderValueChanged="btn2k_SliderValueChanged" x:Name="btn2k" Grid.Column="6" DisplayText="2k"/>
+                    <cons:SlideValue SliderValueChanged="btn4k_SliderValueChanged" x:Name="btn4k" Grid.Column="7" DisplayText="4k"/>
+                    <cons:SlideValue SliderValueChanged="btn8k_SliderValueChanged" x:Name="btn8k" Grid.Column="8" DisplayText="8k"/>
+                    <cons:SlideValue SliderValueChanged="btn16k_SliderValueChanged" x:Name="btn16k" Grid.Column="9" DisplayText="&gt;16kHZ"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Slider x:Name="Slider" VerticalAlignment="Center" Background="Transparent"
+                                    Thumb.DragStarted="Slider_DragStarted"
+                                    Thumb.DragCompleted="Slider_DragCompleted"
+                                    Thumb.DragDelta="Slider_DragDelta"
+                            />
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="10">
+                    <RichTextBox x:Name="richLog"  Background="Transparent" Foreground="{DynamicResource TextColorMain}" TextChanged="textchanged">
+
+                    </RichTextBox>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Canvas Margin="5" x:Name="spectrumCanvas" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                    </Canvas>
+                </Grid>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="建设中" Foreground="White" TextAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

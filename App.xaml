@@ -1,0 +1,16 @@
+﻿<Application x:Class="WPFSong.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPFSong"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 首先合并默认的主题资源字典 (例如LightTheme) -->
+                <ResourceDictionary Source="/Resource/StyleResource/DarkTheme.xaml" />
+                <!-- 然后合并你的主样式资源字典 -->
+                <ResourceDictionary Source="/Resource/StyleResource/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
